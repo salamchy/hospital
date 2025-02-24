@@ -5,14 +5,14 @@ const HeroImage = () => {
       {/* Hero Section */}
       <div
         className="relative w-full h-screen bg-cover bg-center bg-no-repeat md:bg-[url('./hero1.png')]"  >
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between px-30 h-full">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between  h-full">
           {/* Left Content */}
           <div className="max-w-2xl text-center md:text-left">
             <p className="text-secondary text-[18px] font-work font-semibold uppercase">Caring for Life</p>
             <h1 className="text-3xl font-yeseva md:text-5xl font-bold text-primary leading-tight mt-2">
               Leading the Way <br /> in Medical Excellence
             </h1>
-            <button className="mt-6 px-8 py-3 bg-extra text-primary font-semibold shadow-md hover:bg-secondary font-work rounded-full transition">
+            <button className="mt-6 px-8 py-3 bg-extra text-primary font-semibold shadow-md cursor-pointer hover:bg-secondary font-work rounded-full transition">
               Our Services
             </button>
           </div>
@@ -21,13 +21,13 @@ const HeroImage = () => {
         {/* Absolute Positioned Appointment Buttons */}
         <div className="hidden md:block">
           <div className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-1/2 w-full flex justify-center gap-4">
-            <button className="flex items-center gap-10 px-12 py-6 bg-primary text-white rounded-lg shadow-md hover:bg-blue-800 transition">
+            <button className="flex items-center gap-10 px-12 py-6 bg-primary text-white rounded-lg shadow-md ">
               Book an Appointment <img src="./calendar.png" alt="calendar" className="h-8 w-8" />
             </button>
-            <button className="flex items-center gap-10 px-12 py-6 bg-extra text-primary rounded-lg shadow-md hover:bg-blue-400 transition">
+            <button className="flex items-center gap-10 px-12 py-6 bg-extra text-primary rounded-lg shadow-md ">
               Book an Appointment <img src="./user.svg" alt="calendar" className="h-8 w-8" />
             </button>
-            <button className="flex items-center gap-10 px-12 py-6 bg-secondary text-white rounded-lg shadow-md hover:bg-blue-700 transition">
+            <button className="flex items-center gap-10 px-12 py-6 bg-secondary text-white rounded-lg shadow-md">
               Book an Appointment <img src="./money.svg" alt="calendar" className="h-8 w-8" />
             </button>
           </div>

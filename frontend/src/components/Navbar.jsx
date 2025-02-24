@@ -7,7 +7,7 @@ const Navbar = () => {
     <header className="fixed top-0 hidden md:block left-0 w-full z-50 bg-white shadow-md">
 
       {/* Top Bar */}
-      <div className="container mx-auto flex justify-between items-center py-3 lg:px-30 text-sm">
+      <div className="container mx-auto flex justify-between items-center py-3 lg:px-20 text-sm">
 
         {/* Logo Section */}
         <div>
@@ -47,13 +47,13 @@ const Navbar = () => {
 
       {/* Main Navigation */}
       <div className="bg-primary text-white">
-        <div className="container mx-auto flex justify-between items-center py-4 px-30">
+        <div className="container mx-auto flex justify-between items-center py-4 px-20">
           {/* Desktop Menu */}
           <nav className="flex items-center gap-8">
             {["Home", "About Us", "Services", "Doctors", "News", "Contact"].map((item, index) => (
               <NavLink
                 key={index}
-                to={`/${item.toLowerCase().replace(/\s+/g, '')}`}
+                to={`/${item.toLowerCase().replace(/\s+/g, '') === 'home' ? '' : item.toLowerCase().replace(/\s+/g, '')}`}
                 className={({ isActive }) =>
                   isActive ? "text-secondary text-[1.125rem] font-bold" : "hover:text-secondary text-[1.125rem]"
                 }
@@ -66,7 +66,7 @@ const Navbar = () => {
           {/* Actions */}
           <div className="flex items-center gap-4">
             <FiSearch className="text-white cursor-pointer" size={20} />
-            <Link className="bg-extra text-[16px] hover:bg-secondary text-primary px-6 py-2 rounded-4xl transition">
+            <Link to="/appointment" className="bg-extra text-[16px] hover:bg-secondary text-primary px-6 py-2 rounded-4xl transition">
               Appointment
             </Link>
           </div>
