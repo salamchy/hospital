@@ -1,4 +1,10 @@
+import Appointment from "../components/Appointment"
+import Contact from "../components/Contact"
+import Doctors from "../components/Doctors"
 import CombinedHeroImg from "../components/HeroImage"
+import News from "../components/News"
+import OurServices from "../components/OurServices"
+import Specialties from "../components/Specialties"
 import WcMedical from "../components/WcMedical"
 
 const Home = () => {
@@ -6,6 +12,12 @@ const Home = () => {
     <div>
       <CombinedHeroImg />
       <WcMedical />
+      <OurServices />
+      <Specialties />
+      <Appointment />
+      <Doctors />
+      <News />
+      <Contact />
     </div>
   )
 }
