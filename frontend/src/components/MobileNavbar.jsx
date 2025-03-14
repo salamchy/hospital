@@ -27,12 +27,12 @@ export default function Navbar() {
         </div>
         {isOpen && (
           <div className="flex absolute flex-col z-20 w-full text-2xl text-primary items-center space-y-3 bg-[#BFD2F8] p-4">
-            <NavLink to="#" className="hover:text-blue-300">Home</NavLink>
-            <NavLink to="#" className="hover:text-blue-300">About Us</NavLink>
-            <NavLink to="#" className="hover:text-blue-300">Services</NavLink>
-            <NavLink to="#" className="hover:text-blue-300">Doctors</NavLink>
-            <NavLink to="#" className="hover:text-blue-300">News</NavLink>
-            <NavLink to="#" className="hover:text-blue-300">Contact</NavLink>
+            <NavLink to="/" className="hover:text-blue-300">Home</NavLink>
+            <NavLink to="/aboutus" className="hover:text-blue-300">About Us</NavLink>
+            <NavLink to="/service" className="hover:text-blue-300">Service</NavLink>
+            <NavLink to="/doctors" className="hover:text-blue-300">Doctors</NavLink>
+            <NavLink to="/news" className="hover:text-blue-300">News</NavLink>
+            <NavLink to="/contact" className="hover:text-blue-300">Contact</NavLink>
             <button className="py-2 mt-5 text-xl w-full mx-5 bg-primary text-[#BFD2F8] rounded-full">Appointment</button>
           </div>
         )}

@@ -9,3 +9,28 @@
   --color-secondary: #159eec;
   --color-extra: #bfd2f8;
 }
+
+.react-time-picker__wrapper {
+  border: none !important; /* Removes default border */
+  padding: 0 !important; /* Removes extra padding */
+  margin: 0 !important; /* Ensures no margins */
+}
+.react-time-picker__inputGroup {
+  padding: 0 !important;
+}
+
+.react-time-picker__wrapper {
+  border: none !important;
+  padding: 0.5rem;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  background: transparent !important;
+  color: white !important;
+  width: 100%;
+  padding: 0.5rem;
+}

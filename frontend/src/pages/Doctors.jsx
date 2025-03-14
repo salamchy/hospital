@@ -1,7 +1,6 @@
 import Contact from "../components/Contact"
 import DoctorsCard from "../components/DoctorCards"
 import DoctorCoverImg from "../components/DoctorCoverImg"
-import News from "../components/News"
 import Testimonial from "../components/Testinomial"
 
 const Doctors = () => {
@@ -10,7 +9,6 @@ const Doctors = () => {
       <DoctorCoverImg />
       <DoctorsCard />
       <Testimonial />
-      <News />
       <Contact />
     </div>
   )

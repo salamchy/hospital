@@ -1,4 +1,3 @@
-import Appointment from "../components/Appointment"
 import Contact from "../components/Contact"
 import Doctors from "../components/Doctors"
 import CombinedHeroImg from "../components/HeroImage"
@@ -14,7 +13,6 @@ const Home = () => {
       <WcMedical />
       <OurServices />
       <Specialties />
-      <Appointment />
       <Doctors />
       <News />
       <Contact />

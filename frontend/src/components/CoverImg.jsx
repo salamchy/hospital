@@ -8,7 +8,7 @@ const CoverImg = ({ imageSrc, h4Text, h1Text }) => {
         <img
           src={imageSrc}
           alt="Description of the image"
-          className="w-full opacity-40 h-[275px] object-top object-cover"
+          className="w-full opacity-40 h-[270px] object-top object-cover"
         />
         <img src={Frame} className="absolute top-0 w-full" alt="" />
         <div className="absolute top-30 left-32 md:left-48 z-10">

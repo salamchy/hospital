@@ -3,34 +3,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { FaLinkedinIn, FaFacebookF, FaTwitter } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import Title from './Title';
-import Image1 from "../assets/car1.png"
-import Image2 from "../assets/car2.png"
-import Image3 from "../assets/car3.png"
-import { useState, useEffect } from 'react';
 
-// Dummy data
-const doctors = [
-  {
-    id: 1,
-    image: Image1,
-    name: 'Dr. John Doe',
-    specialist: 'Neurology',
-  },
-  {
-    id: 2,
-    image: Image2,
-    name: 'Dr. Jane Smith',
-    specialist: 'Neurology',
-  },
-  {
-    id: 3,
-    image: Image3,
-    name: 'Dr. Emily Johnson',
-    specialist: 'Neurology',
-  },
-];
+import { useState, useEffect } from 'react';
+import { useGetDoctorsQuery } from "../features/api/doctorApi";
+
 
 const Doctors = () => {
+  const { data: doctors, error, isLoading } = useGetDoctorsQuery();
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -46,6 +25,9 @@ const Doctors = () => {
     slidesToShow = 3;
   }
 
+  if (isLoading) return <p className="text-center text-lg">Loading doctors...</p>;
+  if (error) return <p className="text-center text-red-500">Error fetching doctors</p>;
+
   return (
     <div className='my-12 md:mt-30 mx-5 md:mx-44'>
       <Title title="trusted care" subtitle="Our Doctors" />
@@ -59,8 +41,8 @@ const Doctors = () => {
         interval={2000}
         centerSlidePercentage={100 / slidesToShow}
       >
-        {doctors.map((doctor) => (
-          <div key={doctor.id} className="p-4">
+        {doctors?.map((doctor, index) => (
+          <div key={doctor.id || index} className="p-4">
             <div className="bg-white mt-10 rounded-lg shadow-lg overflow-hidden">
               <img src={doctor.image} alt={doctor.name} className="w-full" />
               <div className="text-center pt-3 space-y-2 bg-blue-100">

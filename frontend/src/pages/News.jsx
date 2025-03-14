@@ -1,10 +1,12 @@
+import News from "../components/News"
 import NewsCoverImg from "../components/NewsCoverImg"
 
-const News = () => {
+const NewsPage = () => {
   return (
     <div>
       <NewsCoverImg />
+      <News />
     </div>
   )
 }
-export default News
+export default NewsPage

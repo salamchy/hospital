@@ -50,7 +50,7 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center py-4 px-20">
           {/* Desktop Menu */}
           <nav className="flex items-center gap-8">
-            {["Home", "About Us", "Services", "Doctors", "News", "Contact"].map((item, index) => (
+            {["Home", "About Us", "Service", "Doctors", "News", "Contact"].map((item, index) => (
               <NavLink
                 key={index}
                 to={`/${item.toLowerCase().replace(/\s+/g, '') === 'home' ? '' : item.toLowerCase().replace(/\s+/g, '')}`}

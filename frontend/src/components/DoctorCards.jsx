@@ -1,39 +1,20 @@
 import React from 'react';
 import { FaLinkedinIn, FaFacebookF, FaTwitter } from 'react-icons/fa';
 import { Link } from "react-router-dom";
-import Title from './Title';
-import Image1 from "../assets/car1.png"
-import Image2 from "../assets/car2.png"
-import Image3 from "../assets/car3.png"
+import { useGetDoctorsQuery } from "../features/api/doctorApi";
 
-// Dummy data
-const doctors = [
-  {
-    id: 1,
-    image: Image1,
-    name: 'Dr. John Doe',
-    specialist: 'Neurology',
-  },
-  {
-    id: 2,
-    image: Image2,
-    name: 'Dr. Jane Smith',
-    specialist: 'Neurology',
-  },
-  {
-    id: 3,
-    image: Image3,
-    name: 'Dr. Emily Johnson',
-    specialist: 'Neurology',
-  },
-];
 
 const DoctorsCard = () => {
+  const { data: doctors, error, isLoading } = useGetDoctorsQuery();
+
+  if (isLoading) return <p className="text-center text-lg">Loading doctors...</p>;
+  if (error) return <p className="text-center text-red-500">Error fetching doctors</p>;
+
   return (
     <div className='my-8 md:mt-10 mx-5 md:mx-44'>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {doctors.map((doctor) => (
-          <div key={doctor.id} className="p-4">
+        {doctors?.map((doctor, index) => (
+          <div key={doctor.id || index} className="p-4">
             <div className="bg-white mt-10 rounded-lg shadow-lg overflow-hidden">
               <img src={doctor.image} alt={doctor.name} className="w-full" />
               <div className="text-center pt-3 space-y-2 bg-blue-100">

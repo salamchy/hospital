@@ -8,7 +8,7 @@ const app = express();
 // Enable CORS with specific options
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
@@ -27,9 +27,19 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 //import routes
-// import userRouter from "./routes/user.routes.js";
+import AdminRouter from "./routes/user.routes.js";
+import AppointmentRouter from "./routes/appointment.routes.js";
+import ContactRouter from "./routes/contact.routes.js";
+import DoctorRouter from "./routes/doctor.routes.js";
+import NewsRouter from "./routes/news.routes.js";
+import ServiceRouter from "./routes/service.routes.js";
 
 //routes declaration
-// app.use("/api/v1/users", userRouter);
+app.use("/api/admin", AdminRouter);
+app.use("/api/appointment", AppointmentRouter);
+app.use("/api/contact", ContactRouter);
+app.use("/api/doctors", DoctorRouter);
+app.use("/api/news", NewsRouter);
+app.use("/api/service", ServiceRouter);
 
 export { app };

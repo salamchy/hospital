@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const HeroImage = () => {
   return (
@@ -9,12 +10,12 @@ const HeroImage = () => {
           {/* Left Content */}
           <div className="max-w-2xl text-center md:text-left">
             <p className="text-secondary text-[18px] font-work font-semibold uppercase">Caring for Life</p>
-            <h1 className="text-3xl font-yeseva md:text-5xl font-bold text-primary leading-tight mt-2">
+            <h1 className="text-3xl font-yeseva md:text-5xl font-bold text-primary leading-tight my-5">
               Leading the Way <br /> in Medical Excellence
             </h1>
-            <button className="mt-6 px-8 py-3 bg-extra text-primary font-semibold shadow-md cursor-pointer hover:bg-secondary font-work rounded-full transition">
+            <Link to="/service" className=" px-8 py-3 bg-extra text-primary font-semibold shadow-md cursor-pointer hover:bg-secondary font-work rounded-full transition">
               Our Services
-            </button>
+            </Link>
           </div>
         </div>
 
