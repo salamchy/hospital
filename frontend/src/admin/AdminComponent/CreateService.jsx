@@ -47,7 +47,7 @@ const CreateService = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             required
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none "
           />
         </div>
 
@@ -58,7 +58,7 @@ const CreateService = () => {
             onChange={(e) => setDescription(e.target.value)}
             required
             rows="4"
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none "
           />
         </div>
 
@@ -74,7 +74,7 @@ const CreateService = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full p-3 cursor-pointer text-white font-semibold rounded-md transition duration-300 ease-in-out ${isLoading ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'
+          className={`w-full p-3 cursor-pointer text-white font-semibold rounded-md transition duration-300 ease-in-out ${isLoading ? 'bg-gray-400' : 'bg-secondary hover:bg-blue-600'
             }`}
         >
           {isLoading ? 'Adding Service...' : 'Add Service'}

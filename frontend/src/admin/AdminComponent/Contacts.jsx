@@ -7,7 +7,7 @@ const Contacts = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-3xl font-bold text-blue-600 mb-6">User Messages</h2>
+      <h2 className="text-3xl font-bold text-secondary mb-6">User Messages</h2>
 
       {/* Loading State */}
       {isLoading && <p className="text-gray-500">Loading messages...</p>}

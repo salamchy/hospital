@@ -1,16 +1,21 @@
+import { useState } from 'react';
 import { useGetServicesQuery, useDeleteServiceMutation } from '../../features/api/serviceApi';
 import toast from 'react-hot-toast';
 
 const ServiceList = () => {
   const { data: services, isLoading, error } = useGetServicesQuery();
-  const [deleteService, { isLoading: isDeleting, error: deleteError }] = useDeleteServiceMutation();
+  const [deleteService] = useDeleteServiceMutation();
+  const [deletingId, setDeletingId] = useState(null);
 
   const handleDelete = async (id) => {
+    setDeletingId(id);
     try {
       await deleteService(id).unwrap();
       toast.success('Service deleted successfully!');
     } catch (err) {
       toast.error('Error deleting service');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -26,14 +31,14 @@ const ServiceList = () => {
       <h1 className="text-3xl font-bold mb-6 text-center text-gray-700">All Services</h1>
 
       <ul className="space-y-4">
-        {services.map((service) => (
+        {services?.map((service) => (
           <li key={service._id} className="flex items-center justify-between p-4 border border-gray-300 rounded-md shadow-sm">
             <div className="flex-1 min-w-0">
               <h2 className="text-xl font-semibold text-gray-700 truncate">{service.title}</h2>
               <p className="text-sm text-gray-500 truncate overflow-hidden">{service.description}</p>
             </div>
             <div className="flex items-center space-x-4">
-              {service.image && (
+              {service?.image && (
                 <img
                   src={service.image}
                   alt={service.title}
@@ -42,18 +47,16 @@ const ServiceList = () => {
               )}
               <button
                 onClick={() => handleDelete(service._id)}
-                disabled={isDeleting}
-                className={`px-4 py-2 cursor-pointer text-white font-semibold rounded-md transition duration-300 ease-in-out ${isDeleting ? 'bg-gray-400' : 'bg-red-500 hover:bg-red-600'
+                disabled={deletingId === service._id}
+                className={`px-4 py-2 cursor-pointer text-white font-semibold rounded-md transition duration-300 ease-in-out ${deletingId === service._id ? 'bg-gray-400' : 'bg-red-500 hover:bg-red-600'
                   }`}
               >
-                {isDeleting ? 'Deleting...' : 'Delete'}
+                {deletingId === service._id ? 'Deleting...' : 'Delete'}
               </button>
             </div>
           </li>
         ))}
       </ul>
-
-      {deleteError && <div className="mt-4 text-red-500 text-center">{deleteError.message}</div>}
     </div>
   );
 };

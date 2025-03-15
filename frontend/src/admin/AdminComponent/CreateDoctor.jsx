@@ -1,105 +1,86 @@
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useCreateDoctorMutation } from "../../features/api/doctorApi";
 
 const CreateDoctor = () => {
   const [name, setName] = useState("");
   const [specialist, setSpecialist] = useState("");
-  const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [image, setImage] = useState(null);
+  const [createDoctor, { isLoading, error }] = useCreateDoctorMutation();
 
-  // RTK Query Mutation Hook
-  const [createDoctor, { isLoading }] = useCreateDoctorMutation();
-
-  // Handle file selection and show preview
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      setFile(selectedFile);
-      setPreview(URL.createObjectURL(selectedFile));
-    }
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
   };
 
-  // Handle form submission
-  const handleCreateDoctor = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file) {
-      toast.error("Please upload an image!");
+
+    if (!name || !specialist || !image) {
+      toast.error("All fields are required!");
       return;
     }
 
     const formData = new FormData();
-    formData.append("image", file);
     formData.append("name", name);
     formData.append("specialist", specialist);
+    formData.append("image", image);
 
     try {
-      const response = await createDoctor(formData).unwrap();
-
+      await createDoctor(formData).unwrap();
       toast.success("Doctor added successfully!");
       setName("");
       setSpecialist("");
-      setFile(null);
-      setPreview(null);
+      setImage(null);
     } catch (error) {
-      console.error("Error creating doctor:", error);
-      toast.error(error?.data?.message || "Something went wrong. Try again!");
+      toast.error("Failed to add doctor");
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Toaster position="top-right" reverseOrder={false} />
+    <div className="max-w-2xl mt-14 mx-auto p-6 bg-white shadow-md rounded-lg">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-700">Add New Doctor</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block text-lg font-medium text-gray-600">Name</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none"
+          />
+        </div>
 
-      <div className="bg-white shadow-lg rounded-lg p-6 w-96">
-        <h2 className="text-xl font-semibold text-center mb-4">Add New Doctor</h2>
+        <div>
+          <label className="block text-lg font-medium text-gray-600">Specialist</label>
+          <input
+            type="text"
+            value={specialist}
+            onChange={(e) => setSpecialist(e.target.value)}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none"
+          />
+        </div>
 
-        <form onSubmit={handleCreateDoctor} className="space-y-4">
-          <div>
-            <label className="block text-gray-700">Name</label>
-            <input
-              type="text"
-              className="w-full p-2 border rounded"
-              placeholder="Enter Doctor Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
+        <div>
+          <label className="block text-lg font-medium text-gray-600">Image</label>
+          <input
+            type="file"
+            onChange={handleImageChange}
+            className="w-full text-sm text-gray-700 border border-gray-300 rounded-md p-2"
+          />
+        </div>
 
-          <div>
-            <label className="block text-gray-700">Specialist</label>
-            <input
-              type="text"
-              className="w-full p-2 border rounded"
-              placeholder="Enter Specialization"
-              value={specialist}
-              onChange={(e) => setSpecialist(e.target.value)}
-              required
-            />
-          </div>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className={`w-full p-3 cursor-pointer text-white font-semibold rounded-md transition duration-300 ease-in-out ${isLoading ? 'bg-gray-400' : 'bg-secondary hover:bg-blue-600'}`}
+        >
+          {isLoading ? "Adding Doctor..." : "Add Doctor"}
+        </button>
+      </form>
 
-          <div>
-            <label className="block text-gray-700">Upload Image</label>
-            <input className="w-full p-2 border rounded" type="file" accept="image/*" onChange={handleFileChange} />
-          </div>
-
-          {preview && (
-            <div className="mt-2">
-              <img src={preview} alt="Preview" className="w-full h-40 object-cover rounded-md" />
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className={`w-full cursor-pointer p-2 text-white rounded ${isLoading ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"
-              }`}
-            disabled={isLoading}
-          >
-            {isLoading ? "Adding Doctor..." : "Add Doctor"}
-          </button>
-        </form>
-      </div>
+      {error && <div className="mt-4 text-red-500 text-center">{error.message}</div>}
     </div>
   );
 };

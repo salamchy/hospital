@@ -2,6 +2,7 @@ import cloudinary from "../utils/cloudinary.js";
 import streamifier from "streamifier";
 import Doctor from "../models/doctor.model.js";
 
+//add doctor
 export const addDoctor = async (req, res) => {
   try {
     const { name, specialist } = req.body;
@@ -54,6 +55,7 @@ export const addDoctor = async (req, res) => {
   }
 };
 
+//doctor list
 export const getAllDoctors = async (req, res) => {
   try {
     const allDoctors = await Doctor.find().sort({ createdAt: -1 });
@@ -67,7 +69,6 @@ export const deleteDoctor = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Find the doctor by ID
     const doctor = await Doctor.findById(id);
     if (!doctor) {
       return res.status(404).json({ error: "Doctor not found" });
@@ -78,11 +79,9 @@ export const deleteDoctor = async (req, res) => {
     if (imageUrl) {
       const publicId = imageUrl.split("/").pop().split(".")[0];
 
-      // Delete image from Cloudinary
       await cloudinary.uploader.destroy(`doctors/${publicId}`);
     }
 
-    // Delete doctor from the database
     await Doctor.findByIdAndDelete(id);
 
     res.status(200).json({

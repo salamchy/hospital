@@ -1,33 +1,37 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginStart, loginSuccess, loginFailure } from '../../features/slice/authSlice';
-import { useLoginUserMutation } from '../../features/api/userApi';
-import { FaUser, FaLock } from 'react-icons/fa';
-import { toast, Toaster } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginStart, loginSuccess, loginFailure } from "../../features/slice/authSlice";
+import { useLoginUserMutation } from "../../features/api/userApi";
+import { FaUser, FaLock } from "react-icons/fa";
+import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
   const [loginUser] = useLoginUserMutation();
   const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const response = await loginUser({ email, password });
-      if ('error' in response) {
-        throw new Error(response.error?.data?.message || 'Login failed');
+      const response = await loginUser(credentials);
+      if ("error" in response) {
+        throw new Error(response.error?.data?.message || "Login failed");
       }
-      dispatch(loginSuccess({ token: response.data.token, email }));
-      toast.success('Login successful!');
-      navigate('/admin/dashboard'); // Redirect to dashboard
+      dispatch(loginSuccess({ token: response.data.token, email: credentials.email }));
+      toast.success("Login successful!");
+      setCredentials({ email: "", password: "" });
+      navigate("/admin/dashboard");
     } catch (err) {
       dispatch(loginFailure(err.message));
-      toast.error(err.message || 'An error occurred during login.');
+      toast.error(err.message || "An error occurred during login.");
     }
   };
 
@@ -41,10 +45,11 @@ const AdminLogin = () => {
             <FaUser className="absolute left-3 top-3 text-gray-400" />
             <input
               type="email"
+              name="email"
               placeholder="Email"
               className="w-full pl-10 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={credentials.email}
+              onChange={handleChange}
               required
             />
           </div>
@@ -52,19 +57,20 @@ const AdminLogin = () => {
             <FaLock className="absolute left-3 top-3 text-gray-400" />
             <input
               type="password"
+              name="password"
               placeholder="Password"
               className="w-full pl-10 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={credentials.password}
+              onChange={handleChange}
               required
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 cursor-pointer rounded-lg text-lg font-semibold transition duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            className="w-full bg-secondary cursor-pointer hover:bg-blue-700 text-white py-3 rounded-lg text-lg font-semibold transition duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? "Logging in..." : "Login"}
           </button>
           {error && <p className="text-red-500 text-center mt-4">{error}</p>}
         </form>

@@ -22,7 +22,7 @@ const AllAppointment = ({ refetch }) => {
         <div className="overflow-x-auto">
           <table className="w-full border border-gray-300">
             <thead>
-              <tr className="bg-blue-600 text-white">
+              <tr className="bg-secondary text-white">
                 <th className="p-3 border">Name</th>
                 <th className="p-3 border">Email</th>
                 <th className="p-3 border">Phone</th>

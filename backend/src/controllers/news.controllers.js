@@ -2,7 +2,7 @@ import News from "../models/news.models.js";
 import cloudinary from "../utils/cloudinary.js";
 import streamifier from "streamifier";
 
-// ✅ Get all news
+// Get  news list
 export const getAllNews = async (req, res) => {
   try {
     const newsList = await News.find().sort({ date: -1 });
@@ -12,7 +12,7 @@ export const getAllNews = async (req, res) => {
   }
 };
 
-// ✅ Get single news and increase views
+// Get single news
 export const getNewsById = async (req, res) => {
   try {
     const news = await News.findById(req.params.id);
@@ -27,7 +27,7 @@ export const getNewsById = async (req, res) => {
   }
 };
 
-// ✅ Create news with Cloudinary image upload
+// Create news
 export const createNews = async (req, res) => {
   try {
     const { title, content, authorName } = req.body;

@@ -55,7 +55,7 @@ export const addService = async (req, res) => {
   }
 };
 
-// Get all services
+// Get  services list
 export const getAllServices = async (req, res) => {
   try {
     const services = await Service.find().sort({ createdAt: -1 });

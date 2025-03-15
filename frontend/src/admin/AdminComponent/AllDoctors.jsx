@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetDoctorsQuery, useDeleteDoctorMutation } from "../../features/api/doctorApi";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const DoctorsList = () => {
   const { data: doctors, error, isLoading } = useGetDoctorsQuery();
@@ -23,7 +23,6 @@ const DoctorsList = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <Toaster />
       <h2 className="text-3xl font-bold mb-6 text-center">Doctors List</h2>
       {doctors?.length === 0 ? (
         <p className="text-center text-gray-600">No doctors available.</p>

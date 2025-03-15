@@ -60,7 +60,8 @@ const AppointmentForm = () => {
   };
 
   return (
-    <>      <Toaster position="top-center" reverseOrder={false} />
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
       <form onSubmit={handleSubmit} className="space-y-0">
         <div className="grid grid-cols-2">
           {/* Name Input */}

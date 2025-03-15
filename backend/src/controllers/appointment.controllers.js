@@ -2,7 +2,6 @@ import Appointment from "../models/appointment.models.js";
 
 export const createAppointment = async (req, res) => {
   try {
-    // Validate required fields
     const {
       name,
       email,
@@ -36,7 +35,6 @@ export const createAppointment = async (req, res) => {
       .status(201)
       .json({ message: "Appointment created successfully", appointment });
   } catch (error) {
-    console.error("Error saving appointment:", error); // Log error details
     res.status(500).json({ error: "Failed to create appointment." });
   }
 };

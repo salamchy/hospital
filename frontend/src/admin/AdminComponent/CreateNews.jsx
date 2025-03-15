@@ -7,8 +7,11 @@ const CreateNews = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [authorName, setAuthorName] = useState("");
+  const [createNews, { isLoading, error }] = useCreateNewsMutation();
 
-  const [createNews, { isLoading }] = useCreateNewsMutation();
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,59 +31,71 @@ const CreateNews = () => {
       await createNews(formData).unwrap();
       toast.success("News created successfully!");
 
-      // Reset fields
       setTitle("");
       setContent("");
       setImage(null);
       setAuthorName("");
     } catch (error) {
       toast.error("Failed to create news");
-      console.error("Error creating news:", error);
     }
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Create News</h2>
-
+    <div className="max-w-2xl mt-14 mx-auto p-6 bg-white shadow-md rounded-lg">
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-700">Create News</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border p-2 w-full"
-          required
-        />
-        <textarea
-          placeholder="Content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="border p-2 w-full"
-          required
-        />
-        <input
-          type="file"
-          onChange={(e) => setImage(e.target.files[0])}
-          className="border p-2 w-full"
-          required
-        />
-        <input
-          type="text"
-          placeholder="Author Name"
-          value={authorName}
-          onChange={(e) => setAuthorName(e.target.value)}
-          className="border p-2 w-full"
-          required
-        />
+        <div>
+          <label className="block text-lg font-medium text-gray-600">Title</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none "
+          />
+        </div>
+
+        <div>
+          <label className="block text-lg font-medium text-gray-600">Content</label>
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+            rows="4"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none "
+          />
+        </div>
+
+        <div>
+          <label className="block text-lg font-medium text-gray-600">Image</label>
+          <input
+            type="file"
+            onChange={handleImageChange}
+            className="w-full text-sm text-gray-700 border border-gray-300 rounded-md p-2"
+          />
+        </div>
+
+        <div>
+          <label className="block text-lg font-medium text-gray-600">Author Name</label>
+          <input
+            type="text"
+            value={authorName}
+            onChange={(e) => setAuthorName(e.target.value)}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none "
+          />
+        </div>
+
         <button
           type="submit"
           disabled={isLoading}
-          className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded"
+          className={`w-full p-3 cursor-pointer text-white font-semibold rounded-md transition duration-300 ease-in-out ${isLoading ? 'bg-gray-400' : 'bg-secondary hover:bg-blue-600'}`}
         >
           {isLoading ? "Creating..." : "Create News"}
         </button>
       </form>
+
+      {error && <div className="mt-4 text-red-500 text-center">{error.message}</div>}
     </div>
   );
 };

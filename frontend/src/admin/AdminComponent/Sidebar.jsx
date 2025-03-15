@@ -17,7 +17,7 @@ const Sidebar = () => {
   const handleLogout = async () => {
     try {
       await logoutUser().unwrap();
-      localStorage.clear(); // Clear session storage
+      localStorage.clear();
       toast.success("Logged out successfully!");
       navigate("/");
     } catch (error) {
@@ -45,47 +45,47 @@ const Sidebar = () => {
 
         {/* Navigation Links */}
         <nav className="mt-10 flex-grow">
-          <NavLink to="/" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <FaHome />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>Home</span>
           </NavLink>
 
-          <NavLink to="/admin/dashboard/appointment" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/admin/dashboard/appointment" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <FaCalendarCheck />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>Appointment List</span>
           </NavLink>
 
-          <NavLink to="/admin/dashboard/contact" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/admin/dashboard/contact" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <AiFillMessage />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>Message List</span>
           </NavLink>
 
-          <NavLink to="/admin/dashboard/create" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/admin/dashboard/create" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <MdOutlinePersonAddAlt />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>Add Doctor</span>
           </NavLink>
 
-          <NavLink to="/admin/dashboard/all" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/admin/dashboard/all" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <FaUserDoctor />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>Doctor List</span>
           </NavLink>
 
-          <NavLink to="/admin/dashboard/news" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/admin/dashboard/news" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <FaRegNewspaper />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>Create News</span>
           </NavLink>
 
-          <NavLink to="/admin/dashboard/news-list" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/admin/dashboard/news-list" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <IoIosListBox />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>News List</span>
           </NavLink>
 
-          <NavLink to="/admin/dashboard/add-service" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/admin/dashboard/add-service" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <MdMedicalServices />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>Add Service</span>
           </NavLink>
 
-          <NavLink to="/admin/dashboard/service-list" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-blue-500" : "hover:bg-gray-700"}`}>
+          <NavLink to="/admin/dashboard/service-list" className={({ isActive }) => `flex items-center gap-3 p-3 my-2 rounded-md transition-all duration-300 ${isActive ? "bg-secondary" : "hover:bg-gray-700"}`}>
             <FaListOl />
             <span className={`${isOpen ? "block" : "hidden"} transition-all`}>Service List</span>
           </NavLink>
